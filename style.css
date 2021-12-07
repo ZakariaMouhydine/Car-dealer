@@ -1,0 +1,24 @@
+body{
+    background-color: beige;
+    color: black;
+    font-family: sans-serif;    
+}
+
+.Holder {
+    display: flex;
+    flex-direction: row;
+}
+
+p {
+    font-weight: 600;
+    color: brown;
+}
+
+.card-holder {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: darkgoldenrod;
+    margin: 1%;
+    padding: 1%;
+}
