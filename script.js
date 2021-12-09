@@ -12,24 +12,68 @@ cardHolder.classList.add("Holder")
 document.body.appendChild(cardHolder)
 
 let cars=[]
-    cars.push({reg: "ytr434", maker:"Ford",model:"Fiesta", colour: "White", mileage:48876, price:4710})
-    cars.push({reg: "asn094", maker:"BMW",model:"X5", colour: "Blue", mileage:89815, price:6200})
-    cars.push({reg: "sdm846", maker:"Mercedes-Benz",model:"G-class", colour: "Red", mileage:5647, price:9800})
-    cars.push({reg: "dfk383", maker:"Jeep",model:"Wrangler", colour: "Black", mileage:2320, price:21400})
-    cars.push({reg: "msj837", maker:"Audi",model:"Q2", colour: "Silver", mileage:3260, price:22330})
+    cars.push({maker:"Ford",model:"Fiesta", colour: "White", mileage:48876, price:4710})
+    cars.push({maker:"BMW",model:"X5", colour: "Blue", mileage:89815, price:6200})
+    cars.push({maker:"Mercedes-Benz",model:"G-class", colour: "Red", mileage:5647, price:9800})
+    cars.push({maker:"Jeep",model:"Wrangler", colour: "Black", mileage:2320, price:21400})
+    cars.push({maker:"Audi",model:"Q2", colour: "Silver", mileage:3260, price:22330})
 
-for (let i=0; i< cars.length; i++) {
-    let card = document.createElement("div")
-    card.className="card-holder"
-    cardHolder.appendChild(card)
+cars=JSON.parse(localStorage.getItem("cars"))
 
-    let heading = document.createElement("h1")
-    heading.classList.add("header")
-    card.appendChild(heading)
-    heading.innerHTML=`Reg: ${cars[i].reg} Maker: ${cars[i].maker} Model: ${cars[i].model}`
+if (cars==null) {
+    cars=[{maker:"Ford",model:"Fiesta", colour: "White", mileage:48876, price:4710}]
 
-    let paragraph = document.createElement("p")
-    card.appendChild(paragraph)
-    paragraph.innerHTML = `Colour: ${cars[i].colour} Mileage(km): ${cars[i].mileage} Price: ${cars[i].price}`
+}
 
+
+render() 
+
+function saveCars(){
+
+    //Store
+    //localStorage.setItem("key"d;'d'lgf;gfd;'fd';'fhfl';'fjfefs');
+    let carsString=JSON.stringify(cars)  //Converts our 'complex' array of car objects into a single string
+    localStorage.setItem("cars", carsString) //permanently saves so the user can close their browser or even switch off
+
+}   
+
+
+let submitButton = document.getElementById("submit")
+submitButton.addEventListener("click", addCar)
+
+function addCar(){
+    let maker=document.getElementById("maker").value 
+    let model=document.getElementById("model").value
+    let mileage=document.getElementById("mileage").value
+    let colour=document.getElementById("colour").value
+    let price=document.getElementById("price").value
+
+    let newCar= {maker:maker,model:model,mileage:mileage,colour:colour,price:price}
+    cars.push(newCar) 
+
+    saveCars()
+    render()
+
+    }
+
+function render() {
+    
+    cardHolder.innerHTML=""
+
+    for (let i=0; i< cars.length; i++) {
+        let card = document.createElement("div")
+        card.className="card-holder"
+        cardHolder.appendChild(card)
+
+        let heading = document.createElement("h1")
+        heading.classList.add("header")
+        card.appendChild(heading)
+        heading.innerHTML=`Maker: ${cars[i].maker} Model: ${cars[i].model}`
+
+        let paragraph = document.createElement("p")
+        card.appendChild(paragraph)
+        paragraph.innerHTML = `Colour: ${cars[i].colour} Mileage(km): ${cars[i].mileage} Price(£): ${cars[i].price}`
+
+    }
+ 
 }
