@@ -1,4 +1,18 @@
 "use strict";
+//{make:"ford",model:"fiesta",mileage:30000}
+//document.createElement()
+//element.appendChild <-- You can append to *any* element (including ones you just created)
+//element.classList.add("someClass")
+//element.innerHTML = "something"/someVariable
+class Car {
+    constructor() {
+        this.maker = "";
+        this.model = "";
+        this.colour = "";
+        this.mileage = 0;
+        this.price = 0;
+    }
+}
 let cardHolder = document.createElement("div");
 cardHolder.classList.add("Holder");
 document.body.appendChild(cardHolder);
@@ -11,7 +25,10 @@ cars.push({ maker: "Audi", model: "Q2", colour: "Silver", mileage: 3260, price: 
 cars = JSON.parse(localStorage.getItem("cars"));
 if (cars == null) {
     cars = [{ maker: "Ford", model: "Fiesta", colour: "White", mileage: 48876, price: 4710 }];
+    saveCars();
 }
+cars.sort((a, b) => a.price - b.price);
+// cars = cars.filter(c => c.colour == "blue")
 render();
 function saveCars() {
     //Store
@@ -44,6 +61,16 @@ function render() {
         let paragraph = document.createElement("p");
         card.appendChild(paragraph);
         paragraph.innerHTML = `Colour: ${cars[i].colour} Mileage(km): ${cars[i].mileage} Price(£): ${cars[i].price}`;
+        let deleteButton = document.createElement("button");
+        deleteButton.dataset.index = i.toString();
+        deleteButton.classList.add("button");
+        card.appendChild(deleteButton);
+        deleteButton.innerHTML = "Delete";
+        deleteButton.addEventListener("click", deleteCar);
+        function deleteCar() {
+            card.remove();
+            cars.splice(this.dataset.index, 1);
+        }
     }
 }
 //# sourceMappingURL=script.js.map
