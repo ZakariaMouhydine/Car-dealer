@@ -5,12 +5,16 @@
 //element.classList.add("someClass")
 //element.innerHTML = "something"/someVariable
 class Car {
-    constructor() {
+    constructor(maker, model, colour, mileage, price) {
         this.maker = "";
         this.model = "";
         this.colour = "";
         this.mileage = 0;
         this.price = 0;
+        this.maker = maker;
+        this.model = model;
+        this.mileage = mileage;
+        this.price = price;
     }
 }
 let cardHolder = document.createElement("div");
@@ -27,6 +31,7 @@ if (cars == null) {
     cars = [{ maker: "Ford", model: "Fiesta", colour: "White", mileage: 48876, price: 4710 }];
     saveCars();
 }
+cars.push(new Car("Tesla", "3", "white", 78954, 30000));
 cars.sort((a, b) => a.price - b.price);
 // cars = cars.filter(c => c.colour == "blue")
 render();

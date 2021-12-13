@@ -14,6 +14,14 @@ class Car {
     mileage: number = 0
     price: number = 0
 
+
+    constructor(maker:string, model:string, colour:string, mileage:number, price:number) {
+        this.maker=maker
+        this.model=model
+        this.mileage=mileage
+        this.price=price
+
+    }
 }
 
 let cardHolder: HTMLDivElement = document.createElement("div")
@@ -32,6 +40,9 @@ if (cars == null) {
     cars = [{ maker: "Ford", model: "Fiesta", colour: "White", mileage: 48876, price: 4710 }]
     saveCars()
 }
+
+
+cars.push(new Car("Tesla","3","white",78954,30000))
 
 cars.sort((a, b) => a.price - b.price)
 
